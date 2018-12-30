@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee69d86238fbcb74c8bebc2923ebe43b, type: 3}
+  m_Name: Crazed Rampage
+  m_EditorClassIdentifier: 
+  cardType: {fileID: 11400000, guid: b6722a5c3f1d5604497513164dde79aa, type: 2}
+  properties:
+  - stringValue: CRAZED RAMPAGE
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 063e7a9a6c285cb409ab9c01d557849f, type: 2}
+  - stringValue: HULK
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 2abd72dbcce117947aeb14d12a0b068c, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: 21300000, guid: 2888ed1f092e27a4390b2a7a7e160d31, type: 3}
+    element: {fileID: 11400000, guid: 6f4e5acb7ec595c4db8f0dde2f381a70, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: 21300000, guid: f6dd4be525f64cf4da49d28484ce5755, type: 3}
+    element: {fileID: 11400000, guid: 8801b3e0da885014590eb76aa947e2b2, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: 21300000, guid: 4131fe070625f394085edd7b393decae, type: 3}
+    element: {fileID: 11400000, guid: 9265377b2bc50d24886bded034782af7, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: 21300000, guid: 6ce0fa41bb114f54cad3cda7fedde071, type: 3}
+    element: {fileID: 11400000, guid: b576029dd7b9d3943bd42b5bd07e4e34, type: 2}
+  - stringValue: 
+    intValue: 5
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 6cdda406132387c4ab96f345db897152, type: 2}
+  - stringValue: Each player gains a wound.
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 1cd88a67294c39e45b3673b3fc582ede, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: 21300000, guid: b69d214bbb085074b8854aae4e21b64c, type: 3}
+    element: {fileID: 11400000, guid: dbf2a4c80cf9a6f4a93a28a430a1b544, type: 2}
+  - stringValue: 
+    intValue: 4
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 47c7abd07295de143b45bc29178fae49, type: 2}
