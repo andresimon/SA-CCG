@@ -8,16 +8,17 @@ namespace Legendary
     {
         public static GameManager gameManager;
 
-        private static PropertiesManager _propertiesManager;
+        private static ResourcesManager _resourcesManager;
 
-        public static PropertiesManager GetPropertiesManager()
+        public static ResourcesManager GetResourcesManager()
         {
-            if (_propertiesManager == null )
+            if (_resourcesManager == null )
             {
-                _propertiesManager = Resources.Load("PropertiesManager") as PropertiesManager;
+                _resourcesManager = Resources.Load("ResourcesManager") as ResourcesManager;
+                _resourcesManager.Init();
             }
 
-            return _propertiesManager;
+            return _resourcesManager;
         }
 
         public static List<RaycastResult> GetUIObjs()
@@ -31,6 +32,14 @@ namespace Legendary
             EventSystem.current.RaycastAll(pointerData, results);
 
             return results;
+        }
+
+        public static void SetParentForCard(Transform c, Transform p)
+        {
+            c.SetParent(p);
+            c.localPosition = Vector3.zero;
+            c.localEulerAngles = Vector3.zero;
+            c.localScale = Vector3.one;
         }
     }
 }

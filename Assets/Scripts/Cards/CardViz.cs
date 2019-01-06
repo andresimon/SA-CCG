@@ -11,11 +11,6 @@ namespace Legendary
         public CardVizProperties[] properties;
         public GameObject[] HeroPropertiesHolder;
 
-        public void Start()
-        {
-            LoadCard(card);
-        }
-
         public void LoadCard(Card c)
         {
             if (c == null) return;
