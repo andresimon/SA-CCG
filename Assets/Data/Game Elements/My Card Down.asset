@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58371a16d5c7a8448b446e305de797ae, type: 3}
-  m_Name: PlayerState
+  m_Script: {fileID: 11500000, guid: a00718655bbe16b43a3d531743611910, type: 3}
+  m_Name: My Card Down
   m_EditorClassIdentifier: 
-  actions:
-  - {fileID: 11400000, guid: 296c029309f48df4ebf16606c61562dc, type: 2}
-  - {fileID: 11400000, guid: 9f262eb7f3d3c9540994f85ea16ce717, type: 2}

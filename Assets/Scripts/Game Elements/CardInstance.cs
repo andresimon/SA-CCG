@@ -6,15 +6,26 @@ namespace Legendary
 {
     public class CardInstance : MonoBehaviour, IClickable
     {
+        public CardViz viz;
+        public GameElements.GE_Logic currentLogic;
+
+        void Start()
+        {
+            viz = GetComponent<CardViz>();
+        }
+
         public void OnClick()
         {
-            throw new System.NotImplementedException();
+            if (currentLogic == null) return;
+
+            currentLogic.OnClick(this);
         }
 
         public void OnHighligth()
         {
-            Vector3 s = Vector3.one * 2;
-            this.transform.localScale = s;
+            if (currentLogic == null) return;
+
+            currentLogic.OnHighligth(this);
         }
     }
 }

@@ -9,9 +9,20 @@ namespace Legendary
     {
         public GameState currentState;
 
-        void Update()
+        private void Start()
+        {
+            Settings.gameManager = this;
+        }
+
+        private void Update()
         {
             currentState.Tick(Time.deltaTime);
         }
+
+        public void SetState(GameState state)
+        {
+            currentState = state;
+        }
+
     }
 }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58371a16d5c7a8448b446e305de797ae, type: 3}
-  m_Name: PlayerState
+  m_Script: {fileID: 11500000, guid: daecd336ad24c3b44a399302f71ad2eb, type: 3}
+  m_Name: MouseHoldWithCard
   m_EditorClassIdentifier: 
-  actions:
-  - {fileID: 11400000, guid: 296c029309f48df4ebf16606c61562dc, type: 2}
-  - {fileID: 11400000, guid: 9f262eb7f3d3c9540994f85ea16ce717, type: 2}
+  playerControlState: {fileID: 11400000, guid: c587fc97913afe34488f5b56d9b8da50, type: 2}
+  onPlayerControlState: {fileID: 11400000, guid: b01ca9bcc9b7a144f81f2fed96b870a9,
+    type: 2}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Legendary.GameStates
 {
-    [CreateAssetMenu(menuName = "GameState")]
+    [CreateAssetMenu(menuName = "Game State")]
     public  class GameState : ScriptableObject
     {
         public Action[] actions;

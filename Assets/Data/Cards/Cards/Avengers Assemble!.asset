@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee69d86238fbcb74c8bebc2923ebe43b, type: 3}
   m_Name: Avengers Assemble!
   m_EditorClassIdentifier: 
+  cardType: {fileID: 0}
   properties:
   - stringValue: AVENGERS ASSEMBLE!
     intValue: 0

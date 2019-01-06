@@ -11,6 +11,5 @@ namespace Legendary
         public int intValue;
         public Sprite sprite;
         public Element element;
-     
     }
 }
