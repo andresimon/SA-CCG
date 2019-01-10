@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca66d2db38edac4492fc7fc586b00b1, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  userName: Enemy
+  startingCards:
+  - Avengers Assemble!
+  - Crazed Rampage
+  - Master Strike
+  - Bystander
+  - Crazed Rampage
+  handGrid: {fileID: 11400000, guid: 10edb22f4d6c76c4ca2e189e2fde347a, type: 2}
+  downGrid: {fileID: 11400000, guid: af4857e027ebf714fae83f1d74a064e6, type: 2}
+  handLogic: {fileID: 11400000, guid: 6952faa8cf3fcf042bec9c995095290d, type: 2}
+  downLogic: {fileID: 11400000, guid: 177d0a2bb19ece4429424f617e02b427, type: 2}

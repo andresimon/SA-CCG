@@ -14,10 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardType: {fileID: 11400000, guid: 849add853e1eef74b8b91c096369e179, type: 2}
   properties:
-  - stringValue: MASTER STRIKE
-    intValue: 0
-    sprite: {fileID: 0}
-    element: {fileID: 11400000, guid: 063e7a9a6c285cb409ab9c01d557849f, type: 2}
   - stringValue: 
     intValue: 0
     sprite: {fileID: 21300000, guid: ca5fcf9ae543e884a96eb8b236dd4bc3, type: 3}

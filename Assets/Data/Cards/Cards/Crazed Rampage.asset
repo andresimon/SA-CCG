@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Crazed Rampage
   m_EditorClassIdentifier: 
   cardType: {fileID: 11400000, guid: b6722a5c3f1d5604497513164dde79aa, type: 2}
+  cost: 2
   properties:
   - stringValue: CRAZED RAMPAGE
     intValue: 0

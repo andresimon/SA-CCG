@@ -34,6 +34,12 @@ namespace Legendary
             return results;
         }
 
+        public static void DropHeroCard(Transform c, Transform p, Card card)
+        {
+            SetParentForCard(c, p);
+            gameManager.currentPlayer.UseResourceCards(card.cost);
+        }
+
         public static void SetParentForCard(Transform c, Transform p)
         {
             c.SetParent(p);

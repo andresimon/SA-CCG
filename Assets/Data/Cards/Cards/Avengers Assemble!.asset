@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Avengers Assemble!
   m_EditorClassIdentifier: 
   cardType: {fileID: 11400000, guid: b6722a5c3f1d5604497513164dde79aa, type: 2}
+  cost: 1
   properties:
   - stringValue: AVENGERS ASSEMBLE!
     intValue: 0
@@ -42,6 +43,10 @@ MonoBehaviour:
     intValue: 3
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: 6cdda406132387c4ab96f345db897152, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: 21300000, guid: 46223e23360687c48882703bfdcce06f, type: 3}
+    element: {fileID: 11400000, guid: 787d2cd5023c8524889b64d46f469fea, type: 2}
   - stringValue: You get +1* for each color of hero you have.
     intValue: 0
     sprite: {fileID: 0}
@@ -51,6 +56,6 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: b69d214bbb085074b8854aae4e21b64c, type: 3}
     element: {fileID: 11400000, guid: dbf2a4c80cf9a6f4a93a28a430a1b544, type: 2}
   - stringValue: 
-    intValue: 0
+    intValue: 3
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: 47c7abd07295de143b45bc29178fae49, type: 2}

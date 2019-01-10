@@ -7,7 +7,6 @@ namespace Legendary
 
     public abstract class Element : ScriptableObject
     {
-       
     }
 }
 

@@ -11,15 +11,40 @@ namespace Legendary
         public GameState currentState;
         public GameObject cardPrefab;
 
+        public Turn[] turns;
+        public int turnIndex;
+
+        public SO.GameEvent onTurnChanged;
+        public SO.GameEvent onPhaseCompleted;
+        public SO.StringVariable turnText;
+
         private void Start()
         {
             Settings.gameManager = this;
             CreateStartingCards();
+
+            turnText.value = turns[turnIndex].player.userName;
+            onTurnChanged.Raise();
+
         }
 
         private void Update()
         {
-            currentState.Tick(Time.deltaTime);
+            bool isComplete = turns[turnIndex].Execute();
+            if ( isComplete )
+            {
+                turnIndex++;
+                if ( turnIndex > turns.Length - 1)
+                {
+                    turnIndex = 0;
+                }
+
+                turnText.value = turns[turnIndex].player.userName;
+                onTurnChanged.Raise();
+            }
+
+            if ( currentState != null)
+                currentState.Tick(Time.deltaTime);
         }
 
         void CreateStartingCards()

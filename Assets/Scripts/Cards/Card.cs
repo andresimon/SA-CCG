@@ -9,6 +9,7 @@ namespace Legendary
     public class Card : ScriptableObject
     {
         public CardType cardType;
+        public int cost;
         public CardProperties[] properties; 
     }
 }
