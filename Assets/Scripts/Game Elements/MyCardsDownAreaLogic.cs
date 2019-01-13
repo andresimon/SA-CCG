@@ -24,8 +24,13 @@ namespace Legendary.GameElements
 
                 if (canUse)
                 {
-                    Settings.DropHeroCard(card.value.transform, areaGrid.value.transform, c);
+                    Settings.DropHeroCard(card.value.transform, areaGrid.value.transform, card.value);
                     card.value.currentLogic = cardDownLogic;
+                }
+                else
+                {
+                    Settings.RegisterEvent("Not enough resources to use card", Color.red);
+
                 }
                 card.value.gameObject.SetActive(true);
             }
@@ -40,6 +45,12 @@ namespace Legendary.GameElements
                     card.value.currentLogic = cardDownLogic;
 
                     Settings.gameManager.currentPlayer.AddResourceCard(card.value.gameObject);
+                }
+                else
+                {
+                    int limit = Settings.gameManager.currentPlayer.resourcesPerTurn;
+                    Settings.RegisterEvent("Can't drop more than " + limit + " resource card per turn",Color.red);
+
                 }
                 card.value.gameObject.SetActive(true);
             }

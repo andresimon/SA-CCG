@@ -7,8 +7,18 @@ namespace Legendary
     public static class Settings
     {
         public static GameManager gameManager;
-
         private static ResourcesManager _resourcesManager;
+        private static ConsoleHook _consoleManager;
+
+        public static void RegisterEvent(string e, Color color)
+        {
+            if (_consoleManager == null)
+            {
+                _consoleManager = Resources.Load("ConsoleHook") as ConsoleHook;
+            }
+
+            _consoleManager.RegisterEvent(e, color);
+        }
 
         public static ResourcesManager GetResourcesManager()
         {
@@ -34,10 +44,18 @@ namespace Legendary
             return results;
         }
 
-        public static void DropHeroCard(Transform c, Transform p, Card card)
+        public static void DropHeroCard(Transform c, Transform p, CardInstance cardInst)
         {
+            cardInst.isFlatfooted = true;
+            // Execute any special card abilities on drop
+
             SetParentForCard(c, p);
-            gameManager.currentPlayer.UseResourceCards(card.cost);
+            if ( cardInst.isFlatfooted )
+            {
+                c.localEulerAngles = new Vector3(0, 0, 90);
+            }
+            gameManager.currentPlayer.UseResourceCards(cardInst.viz.card.cost);
+            gameManager.currentPlayer.DropCard(cardInst);
         }
 
         public static void SetParentForCard(Transform c, Transform p)

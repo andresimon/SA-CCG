@@ -9,10 +9,20 @@ namespace Legendary
         public PlayerHolder player;
 
         [System.NonSerialized] public int index = 0;
-
         public Phase[] phases;
-
         public PhaseVariable currentPhase;
+
+        public PlayerAction[] turnStartActions;
+
+        public void OnTurnStart()
+        {
+            if (turnStartActions == null) return;
+
+            for (int i = 0; i < turnStartActions.Length; i++)
+            {
+                turnStartActions[i].Execute(player);
+            }
+        }
 
         public bool Execute()
         {
@@ -34,8 +44,12 @@ namespace Legendary
                     result = true;
                 }
             }
-
             return result;
+        }
+
+        public void EndCurrentPhase()
+        {
+            phases[index].forceExit = true;
         }
     }
 

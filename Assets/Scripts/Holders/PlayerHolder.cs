@@ -8,25 +8,28 @@ namespace Legendary
     public class PlayerHolder : ScriptableObject
     {
         public string userName;
-        public string[] startingCards;
+        public Color playerColor;
 
-        public SO.TransformVariable handGrid;
-        public SO.TransformVariable resourcesGrid;
-        public SO.TransformVariable downGrid;
+        public string[] startingCards;
 
         public int resourcesPerTurn = 1;
         [System.NonSerialized] public int resourcesDroppedThisTurn;
 
+        public bool isHumanPlayer;
+
         public GameElements.GE_Logic handLogic;
         public GameElements.GE_Logic downLogic;
 
+        [System.NonSerialized] public CardHolders currentHolder;
+
         [System.NonSerialized] public List<CardInstance> handCards = new List<CardInstance>();
         [System.NonSerialized] public List<CardInstance> downCards = new List<CardInstance>();
+        [System.NonSerialized] public List<CardInstance> attackingCards = new List<CardInstance>();
         [System.NonSerialized] public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
 
         public int resourcesCount
         {
-            get { return resourcesGrid.value.GetComponentsInChildren<CardViz>().Length; }
+            get { return currentHolder.resourcesGrid.value.GetComponentsInChildren<CardViz>().Length; }
         }
 
         public void AddResourceCard(GameObject cardObj)
@@ -38,6 +41,9 @@ namespace Legendary
 
             resourcesList.Add(resourceHolder);
             resourcesDroppedThisTurn++;
+
+            Settings.RegisterEvent(userName + " drops resources card", playerColor);
+
         }
 
         public int NonUsedCards()
@@ -76,6 +82,17 @@ namespace Legendary
                 }
             }
             return result;
+        }
+
+        public void DropCard(CardInstance inst)
+        {
+            if (handCards.Contains(inst))
+                handCards.Remove(inst);
+
+            downCards.Add(inst);
+
+            Settings.RegisterEvent(userName + " used " + inst.viz.card.name + " for " + inst.viz.card.cost + " resources", playerColor);
+
         }
 
         public List<ResourceHolder> GetUnusedResources()

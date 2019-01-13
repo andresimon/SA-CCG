@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0237650c3101ec24c9ac2611cf672864, type: 3}
-  m_Name: Battle Phase
+  m_Script: {fileID: 11500000, guid: dea83049dfd8d87499ccd265ab820240, type: 3}
+  m_Name: Reset Flatfooted Cards
   m_EditorClassIdentifier: 
-  phaseName: Battle Phase
-  forceExit: 0

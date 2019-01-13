@@ -6,6 +6,9 @@ namespace Legendary
     [CreateAssetMenu(menuName = "Turns/Battle Phase Player")]
     public class BattlePhase : Phase
     {
+        public GameStates.GameState battlePhaseControl;
+        public Condition isBattleValid;
+
         public override bool IsComplete()
         {
             if (forceExit)
@@ -21,9 +24,11 @@ namespace Legendary
         {
             if (!isInit)
             {
-                Settings.gameManager.SetState(null);
+                Settings.gameManager.SetState((!forceExit ? battlePhaseControl : null));
                 Settings.gameManager.onPhaseCompleted.Raise();
                 isInit = true;
+
+                forceExit = !isBattleValid.IsValid();
             }
 
         }
