@@ -50,10 +50,10 @@ namespace Legendary
             // Execute any special card abilities on drop
 
             SetParentForCard(c, p);
-            if ( cardInst.isFlatfooted )
-            {
-                c.localEulerAngles = new Vector3(0, 0, 90);
-            }
+            // if ( cardInst.isFlatfooted )
+            //{
+            cardInst.SetFlatfooted(cardInst.isFlatfooted);
+            //}
             gameManager.currentPlayer.UseResourceCards(cardInst.viz.card.cost);
             gameManager.currentPlayer.DropCard(cardInst);
         }

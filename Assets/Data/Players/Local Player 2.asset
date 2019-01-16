@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cca66d2db38edac4492fc7fc586b00b1, type: 3}
-  m_Name: Local Player
+  m_Name: Local Player 2
   m_EditorClassIdentifier: 
-  userName: Player
+  userName: Thanos
+  portrait: {fileID: 21300000, guid: caec9a932410491408a9185c26ef22c1, type: 3}
   playerColor: {r: 0.02745098, g: 0.21568628, b: 0.21568628, a: 1}
-  startingCards:
-  - Avengers Assemble!
-  - Crazed Rampage
-  - Master Strike
+  statsUI: {fileID: 0}
+  startingDeck:
   - Bystander
-  - Crazed Rampage
   - Bystander
   - Bystander
   - Bystander
+  - Crazed Rampage
   resourcesPerTurn: 1
   isHumanPlayer: 1
   handLogic: {fileID: 11400000, guid: 6952faa8cf3fcf042bec9c995095290d, type: 2}

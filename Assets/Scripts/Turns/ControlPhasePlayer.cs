@@ -8,6 +8,8 @@ namespace Legendary
     {
         public GameStates.GameState playerControlState;
 
+        public PlayerAction OnStartAction;
+
         public override bool IsComplete()
         {
             if (forceExit)
@@ -27,6 +29,7 @@ namespace Legendary
                 Settings.gameManager.onPhaseCompleted.Raise();
                 isInit = true;
             }
+
         }
 
         public override void OnEndPhase()

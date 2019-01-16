@@ -8,9 +8,15 @@ namespace Legendary
     public class PlayerHolder : ScriptableObject
     {
         public string userName;
+        public Sprite portrait;
         public Color playerColor;
+        [System.NonSerialized] public int health = 20;
 
-        public string[] startingCards;
+        public PlayerStatsUI statsUI;
+
+        // public string[] startingCards;
+        public List<string> startingDeck = new List<string>();
+        [System.NonSerialized] public List<string> all_Cards = new List<string>();
 
         public int resourcesPerTurn = 1;
         [System.NonSerialized] public int resourcesDroppedThisTurn;
@@ -31,6 +37,13 @@ namespace Legendary
         {
             get { return currentHolder.resourcesGrid.value.GetComponentsInChildren<CardViz>().Length; }
         }
+
+        public void Init()
+        {
+            health = 20;
+            all_Cards.AddRange(startingDeck);
+        }
+
 
         public void AddResourceCard(GameObject cardObj)
         {
@@ -84,14 +97,15 @@ namespace Legendary
             return result;
         }
 
-        public void DropCard(CardInstance inst)
+        public void DropCard(CardInstance inst, bool registerEvent = true)
         {
             if (handCards.Contains(inst))
                 handCards.Remove(inst);
 
             downCards.Add(inst);
 
-            Settings.RegisterEvent(userName + " used " + inst.viz.card.name + " for " + inst.viz.card.cost + " resources", playerColor);
+            if ( registerEvent )
+                Settings.RegisterEvent(userName + " used " + inst.viz.card.name + " for " + inst.viz.card.cost + " resources", playerColor);
 
         }
 
@@ -130,6 +144,25 @@ namespace Legendary
                 l[i].cardObj.transform.localEulerAngles = euler;
             }
         }
+
+        public void LoadPlayerOnStatsUI()
+        {
+            if (statsUI != null)
+            {
+                statsUI.player = this;
+                statsUI.UpdateAll();
+            }
+        }
+
+        public void DoDamage(int v)
+        {
+            health -= v;
+
+            if (statsUI != null)
+                statsUI.UpdateHealth();
+        }
+
+       
     }
 
 }

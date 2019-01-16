@@ -12,8 +12,7 @@ namespace Legendary
             {
                 if ( c.isFlatfooted )
                 {
-                    c.viz.transform.localEulerAngles = Vector3.zero;
-                    c.isFlatfooted = false;
+                    c.SetFlatfooted(false);
                 }
             }
         }

@@ -9,8 +9,13 @@ namespace Legendary.GameStates
     public class MouseHoldWithCard : Action
     {
         public CardVariable currentCard;
+
         public GameState playerControlState;
         public SO.GameEvent onPlayerControlState;
+
+        public GameState playerBlockState;
+
+        public Phase blockPhase;
 
         public override void Execute(float d)
         {
@@ -18,24 +23,47 @@ namespace Legendary.GameStates
 
             if ( !mouseIsDown )
             {
+                GameManager gm = Settings.gameManager;
+
                 List<RaycastResult> results = Settings.GetUIObjs();
 
-                foreach (RaycastResult r in results)
+                if (gm.turns[gm.turnIndex].currentPhase.value != blockPhase)
                 {
-                    GameElements.Area a = r.gameObject.GetComponentInParent<GameElements.Area>();
-                    if ( a != null )
+                    foreach (RaycastResult r in results)
                     {
-                        a.OnDrop();
-                        break;
+                        GameElements.Area a = r.gameObject.GetComponentInParent<GameElements.Area>();
+                        if (a != null)
+                        {
+                            a.OnDrop();
+                            break;
+                        }
+                    }
+
+                    currentCard.value.gameObject.SetActive(true);
+                    currentCard.value = null;
+
+                    Settings.gameManager.SetState(playerControlState);
+                    onPlayerControlState.Raise();
+
+                }
+                else
+                {
+                    foreach (RaycastResult r in results)
+                    {
+                        CardInstance c = r.gameObject.GetComponentInParent<CardInstance>();
+                        if ( c != null )
+                        {
+                            bool block = c.CanBeBlocked(currentCard.value);
+                            Settings.gameManager.SetState(playerBlockState);
+                            Settings.SetParentForCard(currentCard.value.transform, c.transform);
+                            currentCard.value.gameObject.SetActive(true);
+                            currentCard.value = null;
+                            onPlayerControlState.Raise();
+
+                            break;
+                        }
                     }
                 }
-
-                currentCard.value.gameObject.SetActive(true);
-                currentCard.value = null;
-
-                Settings.gameManager.SetState(playerControlState);
-                onPlayerControlState.Raise();
-
                 return;
             }
         }

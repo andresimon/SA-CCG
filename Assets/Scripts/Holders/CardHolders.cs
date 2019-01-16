@@ -11,6 +11,8 @@ namespace Legendary
         public SO.TransformVariable downGrid;
         public SO.TransformVariable battleLine;
 
+        [System.NonSerialized] public PlayerHolder playerHolder;
+
         public void SetCardsOnBatlleLine(CardInstance card)
         {
             Vector3 position = card.viz.gameObject.transform.position;
@@ -20,8 +22,18 @@ namespace Legendary
             card.viz.gameObject.transform.position = position;
         }
 
-        public void LoadPlayer(PlayerHolder p)
+        public void SetCardsOffBatlleLine(CardInstance card) // SetCardsDown
         {
+            Settings.SetParentForCard(card.viz.gameObject.transform, downGrid.value.transform);
+        }
+
+        public void LoadPlayer(PlayerHolder p, PlayerStatsUI statsUI)
+        {
+            if (p == null) return;
+
+            playerHolder = p;
+            p.currentHolder = this;
+
             foreach (CardInstance c in p.downCards)
             {
                 Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
@@ -29,15 +41,23 @@ namespace Legendary
 
             foreach (CardInstance c in p.handCards)
             {
-                Settings.SetParentForCard(c.viz.gameObject.transform, handGrid.value.transform);
+                if ( c.viz != null )
+                    Settings.SetParentForCard(c.viz.gameObject.transform, handGrid.value.transform);
             }
 
             foreach (ResourceHolder c in p.resourcesList)
             {
                 Settings.SetParentForCard(c.cardObj.transform, resourcesGrid.value.transform);
             }
-        }
 
+            foreach (CardInstance c in p.attackingCards)
+            {
+                SetCardsOnBatlleLine(c);
+            }
+
+            p.statsUI = statsUI;
+            p.LoadPlayerOnStatsUI();
+        }
     }
 
 }

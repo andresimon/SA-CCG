@@ -16,3 +16,5 @@ MonoBehaviour:
   playerControlState: {fileID: 11400000, guid: c587fc97913afe34488f5b56d9b8da50, type: 2}
   onPlayerControlState: {fileID: 11400000, guid: b01ca9bcc9b7a144f81f2fed96b870a9,
     type: 2}
+  playerBlockState: {fileID: 11400000, guid: 459ba67ae707f764d841a9a946fd5c2d, type: 2}
+  blockPhase: {fileID: 11400000, guid: 33527009ace521b4eaaa8b13eaa3b776, type: 2}
