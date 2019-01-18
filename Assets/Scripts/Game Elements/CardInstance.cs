@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Legendary
 {
@@ -17,7 +15,7 @@ namespace Legendary
             viz = GetComponent<CardViz>();
         }
 
-        public bool CanBeBlocked(CardInstance block)
+        public bool CanBeBlocked(CardInstance block, ref int count)
         {
             bool result = owner.attackingCards.Contains(this);
 
@@ -28,7 +26,7 @@ namespace Legendary
                 // if a card has flying than can be blocked by non flying , you can check it here, or cases like that
 
                 if ( result )
-                    Settings.gameManager.AddBlockInstance(this, block);
+                    Settings.gameManager.AddBlockInstance(this, block, ref count);
             }
             else
             {
@@ -47,6 +45,7 @@ namespace Legendary
                 transform.localEulerAngles = Vector3.zero;
 
         }
+
         public virtual bool CanAttack()
         {
             bool result = true;
@@ -63,7 +62,7 @@ namespace Legendary
 
         public void CardInstanceToGraveyard()
         {
-            Debug.Log("Card to Graveyard.");
+            Settings.gameManager.PutCardOnGraveyard(this);
         }
 
         public void OnClick()

@@ -24,6 +24,9 @@ namespace Legendary
 
         public PlayerStatsUI[] statsUIs;
 
+        public SO.TransformVariable graveyardVariable;
+        List<CardInstance> graveyardCards = new List<CardInstance>();
+
         Dictionary<CardInstance, BlockInstance> blockInstances = new Dictionary<CardInstance, BlockInstance>();
 
         public static GameManager singleton;
@@ -55,7 +58,10 @@ namespace Legendary
         public void LoadPlayerOnActive(PlayerHolder p)
         {
             PlayerHolder prevPlayer = playerOneHolder.playerHolder;
-            LoadPlayerOnHolder(prevPlayer, otherPlayersHolder, statsUIs[1]);
+
+            if ( prevPlayer != p)
+                LoadPlayerOnHolder(prevPlayer, otherPlayersHolder, statsUIs[1]);
+
             LoadPlayerOnHolder(p, playerOneHolder, statsUIs[0]);
         }
 
@@ -173,7 +179,7 @@ namespace Legendary
             return r;
         }
 
-        public void AddBlockInstance(CardInstance attacker, CardInstance blocker)
+        public void AddBlockInstance(CardInstance attacker, CardInstance blocker, ref int count)
         {
             BlockInstance b = null;
             b = GetBlockInstanceOfAttacker(attacker);
@@ -186,6 +192,23 @@ namespace Legendary
 
             if ( !b.blocker.Contains(blocker))
                 b.blocker.Add(blocker);
+
+            count = b.blocker.Count;
+        }
+
+        public void PutCardOnGraveyard(CardInstance c)
+        {
+            c.owner.CardToGraveyard(c);
+            graveyardCards.Add(c);
+
+            c.transform.SetParent(graveyardVariable.value);
+            Vector3 p = Vector3.zero;
+            p.x -= graveyardCards.Count * 5;
+            p.z = graveyardCards.Count * 5;
+
+            c.transform.localPosition = p;
+            c.transform.localRotation = Quaternion.identity;
+            c.transform.localScale = Vector3.one;
         }
     }
 }

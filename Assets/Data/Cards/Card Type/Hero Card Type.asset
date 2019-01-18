@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Hero Card Type
   m_EditorClassIdentifier: 
   typeName: Hero
+  canAttack: 1

@@ -53,12 +53,18 @@ namespace Legendary.GameStates
                         CardInstance c = r.gameObject.GetComponentInParent<CardInstance>();
                         if ( c != null )
                         {
-                            bool block = c.CanBeBlocked(currentCard.value);
-                            Settings.gameManager.SetState(playerBlockState);
-                            Settings.SetParentForCard(currentCard.value.transform, c.transform);
+                            int count = 0;
+                            bool block = c.CanBeBlocked(currentCard.value, ref count);
+
+                            if (block)
+                            {
+                                Settings.SetCardForBlock(currentCard.value.transform, c.transform, count);
+                            }
+
                             currentCard.value.gameObject.SetActive(true);
                             currentCard.value = null;
                             onPlayerControlState.Raise();
+                            Settings.gameManager.SetState(playerBlockState);
 
                             break;
                         }

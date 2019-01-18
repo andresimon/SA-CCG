@@ -36,7 +36,8 @@ namespace Legendary
 
             foreach (CardInstance c in p.downCards)
             {
-                Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
+                if ( !p.attackingCards.Contains(c))
+                    Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
             }
 
             foreach (CardInstance c in p.handCards)

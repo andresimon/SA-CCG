@@ -8,6 +8,9 @@ namespace Legendary
     [CreateAssetMenu(menuName = "Card")]
     public class Card : ScriptableObject
     {
+        [System.NonSerialized] public int instID;
+        [System.NonSerialized] public CardViz cardViz;
+
         public CardType cardType;
         public int cost;
         public CardProperties[] properties; 

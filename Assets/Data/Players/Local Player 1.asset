@@ -18,9 +18,9 @@ MonoBehaviour:
   statsUI: {fileID: 0}
   startingDeck:
   - Avengers Assemble!
+  - Bystander
+  - Bystander
   - Master Strike
-  - Bystander
-  - Bystander
   - Crazed Rampage
   resourcesPerTurn: 1
   isHumanPlayer: 1

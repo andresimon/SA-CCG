@@ -65,5 +65,22 @@ namespace Legendary
             c.localEulerAngles = Vector3.zero;
             c.localScale = Vector3.one;
         }
+
+        public static void SetCardForBlock(Transform c, Transform p, int count)
+        {
+            Vector3 blockPosition = Vector3.zero;
+            blockPosition.x += 150 * count;
+            blockPosition.y -= 150 * count;
+
+            SetParentForCard(c, p, blockPosition, Vector3.zero);
+        }
+
+        public static void SetParentForCard(Transform c, Transform p, Vector3 localPosition, Vector3 euler)
+        {
+            c.SetParent(p);
+            c.localPosition = localPosition;
+            c.localEulerAngles = euler;
+            c.localScale = Vector3.one;
+        }
     }
 }

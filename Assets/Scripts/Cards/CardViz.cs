@@ -15,6 +15,8 @@ namespace Legendary
         {
             if (c == null) return;
 
+            c.cardViz = this;
+
             card = c;
 
             DisableAll();

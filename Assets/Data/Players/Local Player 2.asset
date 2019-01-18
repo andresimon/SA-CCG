@@ -17,7 +17,7 @@ MonoBehaviour:
   playerColor: {r: 0.02745098, g: 0.21568628, b: 0.21568628, a: 1}
   statsUI: {fileID: 0}
   startingDeck:
-  - Bystander
+  - Crazed Rampage
   - Bystander
   - Bystander
   - Bystander

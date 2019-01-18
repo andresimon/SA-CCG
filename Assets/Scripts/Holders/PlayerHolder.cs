@@ -44,7 +44,6 @@ namespace Legendary
             all_Cards.AddRange(startingDeck);
         }
 
-
         public void AddResourceCard(GameObject cardObj)
         {
             ResourceHolder resourceHolder = new ResourceHolder
@@ -162,7 +161,18 @@ namespace Legendary
                 statsUI.UpdateHealth();
         }
 
-       
+       public void CardToGraveyard(CardInstance c)
+        {
+            if (attackingCards.Contains(c))
+                attackingCards.Remove(c);
+
+            if (handCards.Contains(c))
+                handCards.Remove(c);
+
+            if (downCards.Contains(c))
+                downCards.Remove(c);
+        }
+
     }
 
 }

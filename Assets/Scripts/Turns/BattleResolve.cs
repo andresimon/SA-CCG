@@ -38,7 +38,8 @@ namespace Legendary
                 {
                     for (int b = 0; b < bi.blocker.Count; b++)
                     {
-                        CardProperties def = c.GetProperty(defenseElement);
+                      //  CardProperties def = c.GetProperty(defenseElement);
+                        CardProperties def = bi.blocker[b].viz.card.GetProperty(defenseElement);
                         if ( def == null )
                         {
                             Debug.LogWarning("You are trying to block with a card with no defense element!");
@@ -47,7 +48,8 @@ namespace Legendary
 
                         damageValue -= def.intValue;
 
-                        if ( def.intValue <= damageValue )
+                        if ( def.intValue <= attack.intValue)
+                            //if ( def.intValue <= damageValue )
                         {
                             bi.blocker[b].CardInstanceToGraveyard();
                         }

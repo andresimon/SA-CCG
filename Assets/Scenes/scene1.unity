@@ -219,6 +219,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 250.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 714623614}
   - {fileID: 430880243}
   - {fileID: 694833989}
   m_Father: {fileID: 1456537033}
@@ -722,7 +723,7 @@ RectTransform:
   - {fileID: 1107659526}
   - {fileID: 339080388}
   m_Father: {fileID: 107345031}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1036,7 +1037,7 @@ RectTransform:
   - {fileID: 1569947128}
   - {fileID: 110349123}
   m_Father: {fileID: 107345031}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1154,6 +1155,80 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &714623613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 714623614}
+  - component: {fileID: 714623616}
+  - component: {fileID: 714623615}
+  m_Layer: 5
+  m_Name: Graveyard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &714623614
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714623613}
+  m_LocalRotation: {x: 0.2164396, y: -0, z: -0, w: 0.97629607}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3956367, y: 0.39563677, z: 0.39563677}
+  m_Children: []
+  m_Father: {fileID: 107345031}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 555, y: 6}
+  m_SizeDelta: {x: 440, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &714623615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714623613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3630502ccf14f2441add999f49f82495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformVariable: {fileID: 11400000, guid: 0ad668e9ddd4ec2408eccf02613ae108, type: 2}
+--- !u!114 &714623616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714623613}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 420, y: 25}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 1
+  m_ConstraintCount: 1
 --- !u!1 &737121807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,7 +2307,7 @@ MonoBehaviour:
   statsUIs:
   - {fileID: 1882966122965308558}
   - {fileID: 952223388}
-  switchPlayer: 0
+  graveyardVariable: {fileID: 11400000, guid: 0ad668e9ddd4ec2408eccf02613ae108, type: 2}
 --- !u!4 &1300261428
 Transform:
   m_ObjectHideFlags: 0
@@ -2864,6 +2939,7 @@ GameObject:
   - component: {fileID: 1925195363}
   - component: {fileID: 1925195365}
   - component: {fileID: 1925195364}
+  - component: {fileID: 1925195366}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -2927,6 +3003,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925195362}
   m_CullTransparentMesh: 0
+--- !u!114 &1925195366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925195362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3630502ccf14f2441add999f49f82495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformVariable: {fileID: 11400000, guid: 4771fd119dc28244c9fc69133b4cc1c8, type: 2}
 --- !u!1 &1930503752
 GameObject:
   m_ObjectHideFlags: 0
@@ -4722,6 +4811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bde873002725842a488aee7eb80027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   viz: {fileID: 0}
   currentLogic: {fileID: 0}
   isFlatfooted: 0
