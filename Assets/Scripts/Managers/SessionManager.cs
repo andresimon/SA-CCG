@@ -1,26 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Legendary
 {
 
     public class SessionManager : MonoBehaviour
     {
-        #region My Calls
+        public static SessionManager singleton;
+        public delegate void OnSceneLoad();
+        public OnSceneLoad onSceneLoad;
 
-            public void CardIsDroppedDown(int instID, int ownerID)
+        private void Awake()
+        {
+            if (singleton == null)
             {
+                singleton = this;
 
+                DontDestroyOnLoad(this.gameObject);
             }
-
-            public void CardIsPickedUpFromDeck(int instID, int ownerID)
+            else
             {
-
+                Destroy(this.gameObject);
             }
+        }
 
+        public void LoadGameLevel()
+        {
+            StartCoroutine("scene1");
+        }
 
+        public void LoadMenu()
+        {
+            StartCoroutine("menu");
+        }
 
-        #endregion
+        IEnumerator LoadLevel(string level)
+        {
+            yield return SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
+
+            if ( onSceneLoad != null )
+            {
+                onSceneLoad();
+                onSceneLoad = null;
+            }
+        }
     }
 
 }
