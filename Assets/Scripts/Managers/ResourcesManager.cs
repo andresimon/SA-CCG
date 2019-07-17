@@ -9,10 +9,14 @@ namespace Legendary
     {
         public Element typeElement;
         public Card[] allCards;
-        Dictionary<string, Card> cardsDict = new Dictionary<string, Card>();
+        [System.NonSerialized] Dictionary<string, Card> cardsDict = new Dictionary<string, Card>();
+
+        int cardInstIndex;
 
         public void Init()
         {
+            cardInstIndex = -1;
+
             cardsDict.Clear();
             for (int i = 0; i < allCards.Length; i++)
             {
@@ -27,6 +31,8 @@ namespace Legendary
 
             Card newInst = Instantiate(originalCard);
             newInst.name = originalCard.name;
+            newInst.instID = cardInstIndex;
+            cardInstIndex++;
 
             return newInst;
         }

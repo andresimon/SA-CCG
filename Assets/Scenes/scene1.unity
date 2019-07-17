@@ -2291,7 +2291,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d0f3cda5030f141ba45dd7801b1fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourcesManager: {fileID: 11400000, guid: 56ba813a2f0e41948ba92dc976675df7, type: 2}
+  isMultiplayer: 0
   currentPlayer: {fileID: 11400000, guid: 680064313a9e2fa4f8594c84bb16531f, type: 2}
+  localPlayer: {fileID: 11400000, guid: 680064313a9e2fa4f8594c84bb16531f, type: 2}
+  clientPlayer: {fileID: 11400000, guid: cdbc08dc9e01c0a42bd30415ed24617d, type: 2}
   playerOneHolder: {fileID: 11400000, guid: c9f4ae02f53a39f4f983072e6dce5a9a, type: 2}
   otherPlayersHolder: {fileID: 11400000, guid: 79828752f25e555438e8e311d195b429, type: 2}
   currentState: {fileID: 0}

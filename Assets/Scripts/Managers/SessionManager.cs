@@ -25,14 +25,15 @@ namespace Legendary
             }
         }
 
-        public void LoadGameLevel()
+        public void LoadGameLevel(OnSceneLoad callback)
         {
-            StartCoroutine("scene1");
+            onSceneLoad = callback;
+            StartCoroutine(LoadLevel("scene1"));
         }
 
         public void LoadMenu()
         {
-            StartCoroutine("menu");
+            StartCoroutine(LoadLevel("menu"));
         }
 
         IEnumerator LoadLevel(string level)

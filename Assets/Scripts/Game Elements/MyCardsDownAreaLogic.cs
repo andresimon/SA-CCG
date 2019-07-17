@@ -37,22 +37,21 @@ namespace Legendary.GameElements
             else
             if (c.cardType == bystanderType)
             {
-                bool canUse = Settings.gameManager.currentPlayer.CanUseCard(c);
+                MultiplayerManager.singleton.PlayerWantsToUseCard(c.instID, GameManager.singleton.localPlayer.photonId, MultiplayerManager.CardOpertation.dropResourcesCard);
 
-                if (canUse)
-                {
-                    Settings.SetParentForCard(card.value.transform, resourcesGrid.value.transform);
-                    card.value.currentLogic = cardDownLogic;
+                //bool canUse = Settings.gameManager.currentPlayer.CanUseCard(c);
 
-                    Settings.gameManager.currentPlayer.AddResourceCard(card.value.gameObject);
-                }
-                else
-                {
-                    int limit = Settings.gameManager.currentPlayer.resourcesPerTurn;
-                    Settings.RegisterEvent("Can't drop more than " + limit + " resource card per turn",Color.red);
+                //if (canUse)
+                //{
+                   
+                //}
+                //else
+                //{
+                //    int limit = Settings.gameManager.currentPlayer.resourcesPerTurn;
+                //    Settings.RegisterEvent("Can't drop more than " + limit + " resource card per turn",Color.red);
 
-                }
-                card.value.gameObject.SetActive(true);
+                //}
+                //card.value.gameObject.SetActive(true);
             }
         }
     }

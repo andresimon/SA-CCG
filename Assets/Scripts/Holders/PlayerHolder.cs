@@ -10,7 +10,9 @@ namespace Legendary
         public string userName;
         public Sprite portrait;
         public Color playerColor;
+
         [System.NonSerialized] public int health = 20;
+        [System.NonSerialized] public int photonId = -1;
 
         public PlayerStatsUI statsUI;
 
@@ -32,6 +34,10 @@ namespace Legendary
         [System.NonSerialized] public List<CardInstance> downCards = new List<CardInstance>();
         [System.NonSerialized] public List<CardInstance> attackingCards = new List<CardInstance>();
         [System.NonSerialized] public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
+
+        [System.NonSerialized] public List<int> cardInstIds = new List<int>();
+
+        public List<Card> allCardInstances = new List<Card>();
 
         public int resourcesCount
         {

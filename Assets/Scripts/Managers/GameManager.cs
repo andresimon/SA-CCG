@@ -6,8 +6,15 @@ namespace Legendary
 {
     public class GameManager : MonoBehaviour
     {
+        public ResourcesManager resourcesManager;
+
+        public bool isMultiplayer;
+
         [System.NonSerialized] public PlayerHolder[] all_Players;
         public PlayerHolder currentPlayer;
+
+        public PlayerHolder localPlayer;
+        public PlayerHolder clientPlayer;
 
         public CardHolders playerOneHolder;
         public CardHolders otherPlayersHolder;
@@ -27,32 +34,45 @@ namespace Legendary
         public SO.TransformVariable graveyardVariable;
         List<CardInstance> graveyardCards = new List<CardInstance>();
 
+        bool isInit;
+
         Dictionary<CardInstance, BlockInstance> blockInstances = new Dictionary<CardInstance, BlockInstance>();
 
         public static GameManager singleton;
 
         private void Awake()
         {
+            Settings.gameManager = this;
             singleton = this;
+        }
 
+        public void InitGame(int startingPlayer)
+        {
             all_Players = new PlayerHolder[turns.Length];
+            Turn[] _turns = new Turn[2];
+
             for (int i = 0; i < turns.Length; i++)
             {
                 all_Players[i] = turns[i].player;
+
+                if ( all_Players[i].photonId == startingPlayer )
+                {
+                    _turns[0] = turns[i];
+                }
+                else
+                {
+                    _turns[1] = turns[i];
+                }
             }
-
-            currentPlayer = turns[0].player;
-        }
-
-        private void Start()
-        {
-            Settings.gameManager = this;
+            turns = _turns;
 
             SetupPlayers();
 
-            turns[0].OnTurnStart();
             turnText.value = turns[turnIndex].player.userName;
             onTurnChanged.Raise();
+            turns[0].OnTurnStart();
+
+            isInit = true;
         }
 
         public void LoadPlayerOnActive(PlayerHolder p)
@@ -72,24 +92,68 @@ namespace Legendary
 
         private void Update()
         {
-            bool isComplete = turns[turnIndex].Execute();
-            if ( isComplete )
-            {
-                turnIndex++;
-                if ( turnIndex > turns.Length - 1)
-                {
-                    turnIndex = 0;
-                }
+            if (!isInit) return;
 
-                // The current player has changed here
-                currentPlayer = turns[turnIndex].player;
-                turns[turnIndex].OnTurnStart();
-                turnText.value = turns[turnIndex].player.userName;
-                onTurnChanged.Raise();
+            bool isComplete = turns[turnIndex].Execute();
+
+            if (!isMultiplayer)
+            {
+                if (isComplete)
+                {
+                    turnIndex++;
+                    if (turnIndex > turns.Length - 1)
+                    {
+                        turnIndex = 0;
+                    }
+
+                    // The current player has changed here
+                    currentPlayer = turns[turnIndex].player;
+                    turns[turnIndex].OnTurnStart();
+                    turnText.value = turns[turnIndex].player.userName;
+                    onTurnChanged.Raise();
+                }
+            }
+            else
+            {
+                if (isComplete)
+                {
+                    MultiplayerManager.singleton.PlayerEndsTurn(currentPlayer.photonId);
+                }
             }
 
             if ( currentState != null)
                 currentState.Tick(Time.deltaTime);
+        }
+
+        public int GetNextPlayerId()
+        {
+            int result = turnIndex;
+
+            result++;
+            if (result > turns.Length - 1)
+                result = 0;
+
+            return turns[result].player.photonId;
+        }
+
+        int GetPlayerTurnIndex(int photonId)
+        {
+            for (int i = 0; i < turns.Length; i++)
+            {
+                if (turns[i].player.photonId == photonId)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        public void ChangeCurrentTurn(int photonId)
+        {
+            turnIndex = GetPlayerTurnIndex(photonId);
+            currentPlayer = turns[turnIndex].player;
+            turns[turnIndex].OnTurnStart();
+            turnText.value = turns[turnIndex].player.userName;
+            onTurnChanged.Raise();
         }
 
         void SetupPlayers()
@@ -116,25 +180,7 @@ namespace Legendary
 
         public void PickNewCardFromDeck(PlayerHolder p)
         {
-            if ( p.all_Cards.Count == 0 )
-            {
-                Debug.Log("Game Over");
-                return;
-            }
-
-            ResourcesManager rm = Settings.GetResourcesManager();
-
-            string cardId = p.all_Cards[0];
-            p.all_Cards.RemoveAt(0);
-
-            GameObject go = Instantiate(cardPrefab) as GameObject;
-            CardViz v = go.GetComponent<CardViz>();
-            v.LoadCard(rm.GetCardInstance(cardId));
-            CardInstance inst = go.GetComponent<CardInstance>();
-            inst.owner = p;
-            inst.currentLogic = p.handLogic;
-            Settings.SetParentForCard(go.transform, p.currentHolder.handGrid.value);
-            p.handCards.Add(inst);
+            MultiplayerManager.singleton.PlayerPicksCardFromDeck(p);
         }
 
         public void SetState(GameState state)
@@ -144,9 +190,13 @@ namespace Legendary
 
         public void EndCurrentPhase()
         {
-            Settings.RegisterEvent(turns[turnIndex].name + " finished", currentPlayer.playerColor);
+            if (currentPlayer.isHumanPlayer)
+            {
 
-            turns[turnIndex].EndCurrentPhase();
+                Settings.RegisterEvent(turns[turnIndex].name + " finished", currentPlayer.playerColor);
+
+                turns[turnIndex].EndCurrentPhase();
+            }
         }
 
         public PlayerHolder GetEnemyOf(PlayerHolder p)

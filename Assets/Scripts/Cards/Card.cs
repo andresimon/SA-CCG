@@ -10,6 +10,7 @@ namespace Legendary
     {
         [System.NonSerialized] public int instID;
         [System.NonSerialized] public CardViz cardViz;
+        [System.NonSerialized] public CardInstance cardPhysicalInst;
 
         public CardType cardType;
         public int cost;

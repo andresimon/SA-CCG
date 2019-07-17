@@ -9,7 +9,7 @@ namespace Legendary
 
     public class NetworkManager : Photon.PunBehaviour
     {
-        public bool isMaster;
+        public static bool isMaster;
         public static NetworkManager singleton;
 
         List<MultiplayerHolder> multiplayerHolders = new List<MultiplayerHolder>();
@@ -40,6 +40,7 @@ namespace Legendary
 
         private void Start()
         {
+            rm.Init();
             PhotonNetwork.autoCleanUpPlayerObjects = false;
             PhotonNetwork.autoJoinLobby = false;
             PhotonNetwork.automaticallySyncScene = false;
@@ -123,23 +124,23 @@ namespace Legendary
             return card;
         }
 
-        void CreateCardClient_call(string cardID, int instID, int photonID)
-        {
-            Card c = CreateCardCliente(cardID, instID);
-            if ( c != null )
-            {
-                MultiplayerHolder h = GetHolder(photonID);
-                h.RegisterCard(c);
-            }
-        }
+        //void CreateCardClient_call(string cardID, int instID, int photonID)
+        //{
+        //    Card c = CreateCardCliente(cardID, instID);
+        //    if ( c != null )
+        //    {
+        //        MultiplayerHolder h = GetHolder(photonID);
+        //        h.RegisterCard(c);
+        //    }
+        //}
 
-        Card CreateCardCliente(string cardID, int instID)
-        {
-            Card card = rm.GetCardInstance(cardID);
-            card.instID = instID;
+        //Card CreateCardCliente(string cardID, int instID)
+        //{
+        //    Card card = rm.GetCardInstance(cardID);
+        //    card.instID = instID;
 
-            return card;
-        }
+        //    return card;
+        //}
 
         #endregion My Calls
 
@@ -191,9 +192,19 @@ namespace Legendary
                     loggerUpdated.Raise();
 
                     PhotonNetwork.room.IsOpen = false;
-                    //SessionManager.singleton.LoadGameLevel();
+                    PhotonNetwork.Instantiate("MultiplayerManager", Vector3.zero, Quaternion.identity, 0);
                 }
             }
+        }
+
+        public void LoadGameScene()
+        {
+            SessionManager.singleton.LoadGameLevel(OnGameSceneLoad);
+        }
+
+        void OnGameSceneLoad()
+        {
+            MultiplayerManager.singleton.countPlayers = true;
         }
 
         public override void OnDisconnectedFromPhoton()
