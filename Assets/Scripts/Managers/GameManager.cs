@@ -22,17 +22,21 @@ namespace Legendary
         public GameState currentState;
         public GameObject cardPrefab;
 
-        public Turn[] turns;
-        public int turnIndex;
+        //public Turn[] turns;
+        //public int turnIndex;
 
         public SO.GameEvent onTurnChanged;
         public SO.GameEvent onPhaseCompleted;
-        public SO.StringVariable turnText;
+        //public SO.StringVariable turnText;
+
+        Phase currentPhase;
 
         public PlayerStatsUI[] statsUIs;
 
         public SO.TransformVariable graveyardVariable;
         List<CardInstance> graveyardCards = new List<CardInstance>();
+
+        public Element defenceProperty;
 
         bool isInit;
 
@@ -46,31 +50,31 @@ namespace Legendary
             singleton = this;
         }
 
-        public void InitGame(int startingPlayer)
+        public void InitGame()
         {
-            all_Players = new PlayerHolder[turns.Length];
-            Turn[] _turns = new Turn[2];
+            //all_Players = new PlayerHolder[turns.Length];
+            //Turn[] _turns = new Turn[2];
 
-            for (int i = 0; i < turns.Length; i++)
-            {
-                all_Players[i] = turns[i].player;
+            //for (int i = 0; i < turns.Length; i++)
+            //{
+            //    all_Players[i] = turns[i].player;
 
-                if ( all_Players[i].photonId == startingPlayer )
-                {
-                    _turns[0] = turns[i];
-                }
-                else
-                {
-                    _turns[1] = turns[i];
-                }
-            }
-            turns = _turns;
+            //    if ( all_Players[i].photonId == startingPlayer )
+            //    {
+            //        _turns[0] = turns[i];
+            //    }
+            //    else
+            //    {
+            //        _turns[1] = turns[i];
+            //    }
+            //}
+            //turns = _turns;
 
-            SetupPlayers();
+            //SetupPlayers();
 
-            turnText.value = turns[turnIndex].player.userName;
-            onTurnChanged.Raise();
-            turns[0].OnTurnStart();
+            //turnText.value = turns[turnIndex].player.userName;
+            //onTurnChanged.Raise();
+            //turns[0].OnTurnStart();
 
             isInit = true;
         }
@@ -90,71 +94,86 @@ namespace Legendary
             h.LoadPlayer(p, ui);
         }
 
+        public void SetCurrentPhase(Phase phase)
+        {
+            currentPhase = phase;
+        }
+
         private void Update()
         {
             if (!isInit) return;
 
-            bool isComplete = turns[turnIndex].Execute();
+            if (currentPhase == null) return;
 
-            if (!isMultiplayer)
+            bool phaseIsComplete = currentPhase.IsComplete();
+
+            if (phaseIsComplete)
             {
-                if (isComplete)
-                {
-                    turnIndex++;
-                    if (turnIndex > turns.Length - 1)
-                    {
-                        turnIndex = 0;
-                    }
+                currentPhase = null;
+               MultiplayerManager.singleton.PlayerEndsPhase(localPlayer.photonId);
+            } 
 
-                    // The current player has changed here
-                    currentPlayer = turns[turnIndex].player;
-                    turns[turnIndex].OnTurnStart();
-                    turnText.value = turns[turnIndex].player.userName;
-                    onTurnChanged.Raise();
-                }
-            }
-            else
-            {
-                if (isComplete)
-                {
-                    MultiplayerManager.singleton.PlayerEndsTurn(currentPlayer.photonId);
-                }
-            }
+            //bool isComplete = turns[turnIndex].Execute();
 
-            if ( currentState != null)
-                currentState.Tick(Time.deltaTime);
+            //if (!isMultiplayer)
+            //{
+            //    if (isComplete)
+            //    {
+            //        turnIndex++;
+            //        if (turnIndex > turns.Length - 1)
+            //        {
+            //            turnIndex = 0;
+            //        }
+
+            //        // The current player has changed here
+            //        currentPlayer = turns[turnIndex].player;
+            //        turns[turnIndex].OnTurnStart();
+            //        turnText.value = turns[turnIndex].player.userName;
+            //        onTurnChanged.Raise();
+            //    }
+            //}
+            //else
+            //{
+            //    if (isComplete)
+            //    {
+            //        MultiplayerManager.singleton.PlayerEndsTurn(currentPlayer.photonId);
+            //    }
+            //}
+
+            //if ( currentState != null)
+            //    currentState.Tick(Time.deltaTime);
         }
 
-        public int GetNextPlayerId()
-        {
-            int result = turnIndex;
+        //public int GetNextPlayerId()
+        //{
+        //    int result = turnIndex;
 
-            result++;
-            if (result > turns.Length - 1)
-                result = 0;
+        //    result++;
+        //    if (result > turns.Length - 1)
+        //        result = 0;
 
-            return turns[result].player.photonId;
-        }
+        //    return turns[result].player.photonId;
+        //}
 
-        int GetPlayerTurnIndex(int photonId)
-        {
-            for (int i = 0; i < turns.Length; i++)
-            {
-                if (turns[i].player.photonId == photonId)
-                    return i;
-            }
+        //int GetPlayerTurnIndex(int photonId)
+        //{
+        //    for (int i = 0; i < turns.Length; i++)
+        //    {
+        //        if (turns[i].player.photonId == photonId)
+        //            return i;
+        //    }
 
-            return -1;
-        }
+        //    return -1;
+        //}
 
-        public void ChangeCurrentTurn(int photonId)
-        {
-            turnIndex = GetPlayerTurnIndex(photonId);
-            currentPlayer = turns[turnIndex].player;
-            turns[turnIndex].OnTurnStart();
-            turnText.value = turns[turnIndex].player.userName;
-            onTurnChanged.Raise();
-        }
+        //public void ChangeCurrentTurn(int photonId)
+        //{
+        //    turnIndex = GetPlayerTurnIndex(photonId);
+        //    currentPlayer = turns[turnIndex].player;
+        //    turns[turnIndex].OnTurnStart();
+        //    turnText.value = turns[turnIndex].player.userName;
+        //    onTurnChanged.Raise();
+        //}
 
         void SetupPlayers()
         {
@@ -190,12 +209,10 @@ namespace Legendary
 
         public void EndCurrentPhase()
         {
-            if (currentPlayer.isHumanPlayer)
+            if (currentPhase != null)
             {
-
-                Settings.RegisterEvent(turns[turnIndex].name + " finished", currentPlayer.playerColor);
-
-                turns[turnIndex].EndCurrentPhase();
+                MultiplayerManager.singleton.PlayerEndsPhase(localPlayer.photonId);
+                //turns[turnIndex].EndCurrentPhase();
             }
         }
 
@@ -260,5 +277,11 @@ namespace Legendary
             c.transform.localRotation = Quaternion.identity;
             c.transform.localScale = Vector3.one;
         }
+
+        public void LocalPlayerEndsBattleResolve()
+        {
+           // turns[turnIndex].EndCurrentPhase();
+        }
+
     }
 }

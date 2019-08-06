@@ -15,3 +15,7 @@ MonoBehaviour:
   phaseName: Control Phase
   forceExit: 0
   playerControlState: {fileID: 11400000, guid: c587fc97913afe34488f5b56d9b8da50, type: 2}
+  turnStartActions:
+  - {fileID: 11400000, guid: 441be0d9dfa25c44ebc46ce6a151bfd0, type: 2}
+  - {fileID: 11400000, guid: f9c1f07d6e27f6544972367b3666d514, type: 2}
+  - {fileID: 11400000, guid: 5d2c390d5ece70944be45c36a29a8266, type: 2}

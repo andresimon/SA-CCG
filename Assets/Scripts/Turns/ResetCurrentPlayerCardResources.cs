@@ -8,13 +8,9 @@ namespace Legendary
     {
         public override bool IsComplete()
         {
-            Settings.gameManager.currentPlayer.MakeAllResourceCardUsable();
+           // MultiplayerManager.singleton.PlayerWantsToResetResourcesCards(player.photonId);
 
             return true;
-        }
-
-        public override void OnEndPhase()
-        {
         }
 
         public override void OnStartPhase()

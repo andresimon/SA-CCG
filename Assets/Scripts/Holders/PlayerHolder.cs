@@ -11,7 +11,7 @@ namespace Legendary
         public Sprite portrait;
         public Color playerColor;
 
-        [System.NonSerialized] public int health = 20;
+        [System.NonSerialized] public int health;
         [System.NonSerialized] public int photonId = -1;
 
         public PlayerStatsUI statsUI;

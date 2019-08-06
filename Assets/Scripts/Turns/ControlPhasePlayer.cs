@@ -8,7 +8,9 @@ namespace Legendary
     {
         public GameStates.GameState playerControlState;
 
-        public PlayerAction OnStartAction;
+        public PlayerAction[] turnStartActions;
+
+       // public PlayerAction OnStartAction;
 
         public override bool IsComplete()
         {
@@ -18,26 +20,19 @@ namespace Legendary
                 return true;
             }
 
+            playerControlState.Tick(Time.deltaTime);
+
             return false;
         }
        
         public override void OnStartPhase()
         {
-            if (!isInit)
-            {
-                Settings.gameManager.SetState(playerControlState);
-                Settings.gameManager.onPhaseCompleted.Raise();
-                isInit = true;
-            }
+            Settings.gameManager.SetState(playerControlState);
+            Settings.gameManager.onPhaseCompleted.Raise();
 
-        }
-
-        public override void OnEndPhase()
-        {
-            if (isInit)
+            foreach (PlayerAction action in turnStartActions)
             {
-                Settings.gameManager.SetState(null);
-                isInit = false;
+                action.Execute(Settings.gameManager.localPlayer);
             }
         }
 

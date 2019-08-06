@@ -17,9 +17,6 @@ namespace Legendary
         }
 
         public override void OnStartPhase() { }
-
-        public override void OnEndPhase() { }
-
     }
 
 }

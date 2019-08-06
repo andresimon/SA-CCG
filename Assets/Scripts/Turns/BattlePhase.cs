@@ -22,24 +22,12 @@ namespace Legendary
 
         public override void OnStartPhase()
         {
-            if (!isInit)
-            {
-                Settings.gameManager.SetState((!forceExit ? battlePhaseControl : null));
-                Settings.gameManager.onPhaseCompleted.Raise();
-                isInit = true;
+            forceExit = true;
+            return;
 
-                forceExit = !isBattleValid.IsValid();
-            }
-
-        }
-
-        public override void OnEndPhase()
-        {
-            if (isInit)
-            {
-                Settings.gameManager.SetState(null);
-                isInit = false;
-            }
+            forceExit = !isBattleValid.IsValid();
+            Settings.gameManager.SetState((!forceExit ? battlePhaseControl : null));
+            Settings.gameManager.onPhaseCompleted.Raise();
         }
 
     }

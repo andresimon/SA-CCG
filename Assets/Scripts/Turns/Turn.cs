@@ -22,28 +22,32 @@ namespace Legendary
             {
                 turnStartActions[i].Execute(player);
             }
+
+            MultiplayerManager.singleton.SendPhase(phases[index].name, player.name);
         }
 
         public bool Execute()
         {
             bool result = false;
 
-            currentPhase.value = phases[index];
-            phases[index].OnStartPhase();
+            //currentPhase.value = phases[index];
+            //phases[index].OnStartPhase();
 
-            bool phaseIsComplete = phases[index].IsComplete();
+            //bool phaseIsComplete = phases[index].IsComplete();
 
-            if ( phaseIsComplete )
-            {
-                phases[index].OnEndPhase();
+            //if ( phaseIsComplete )
+            //{
+            //    phases[index].OnEndPhase();
 
-                index++;
-                if ( index > phases.Length - 1)
-                {
-                    index = 0;
-                    result = true;
-                }
-            }
+            //    index++;
+            //    if ( index > phases.Length - 1)
+            //    {
+            //        index = 0;
+            //        result = true;
+            //    }
+
+            //    MultiplayerManager.singleton.SendPhase(phases[index].name, player.name);
+            //}
             return result;
         }
 

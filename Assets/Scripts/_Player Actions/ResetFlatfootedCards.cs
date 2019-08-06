@@ -8,13 +8,8 @@ namespace Legendary
     {
         public override void Execute(PlayerHolder player)
         {
-            foreach (CardInstance c in player.downCards)
-            {
-                if ( c.isFlatfooted )
-                {
-                    c.SetFlatfooted(false);
-                }
-            }
+            MultiplayerManager.singleton.PlayerWantsToResetResourcesCards(player.photonId);
+            MultiplayerManager.singleton.PlayerWantsToResetFlatfootedCards(player.photonId);
         }
     }
 

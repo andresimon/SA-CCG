@@ -17,6 +17,8 @@ namespace Legendary.GameStates
 
         public Phase blockPhase;
 
+        public bool isBlocking;
+
         public override void Execute(float d)
         {
             bool mouseIsDown = Input.GetMouseButton(0);
@@ -27,7 +29,7 @@ namespace Legendary.GameStates
 
                 List<RaycastResult> results = Settings.GetUIObjs();
 
-                if (gm.turns[gm.turnIndex].currentPhase.value != blockPhase)
+                if (!isBlocking)
                 {
                     foreach (RaycastResult r in results)
                     {
@@ -58,7 +60,9 @@ namespace Legendary.GameStates
 
                             if (block)
                             {
-                                Settings.SetCardForBlock(currentCard.value.transform, c.transform, count);
+                                CardInstance myCard = currentCard.value;
+                                MultiplayerManager.singleton.PlayerBlocksTargetCard(myCard.viz.card.instID, myCard.owner.photonId, c.viz.card.instID, c.owner.photonId);
+                                //Settings.SetCardForBlock(currentCard.value.transform, c.transform, count);
                             }
 
                             currentCard.value.gameObject.SetActive(true);

@@ -9,11 +9,8 @@ namespace Legendary
         public bool forceExit;
 
         public abstract bool IsComplete();
-
-        [System.NonSerialized] protected bool isInit;
-
         public abstract void OnStartPhase();
-        public abstract void OnEndPhase();
+        //public abstract void OnEndPhase();
     }
 
 }

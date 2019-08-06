@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataHolder: {fileID: 11400000, guid: f64d9432f47d8e44aba29c81ce47700b, type: 2}
   countPlayers: 0
+  turnsHolder: {fileID: 11400000, guid: 72380c27d7be4d94c85edc7f3a6823bc, type: 2}
 --- !u!114 &8541247254981945472
 MonoBehaviour:
   m_ObjectHideFlags: 0

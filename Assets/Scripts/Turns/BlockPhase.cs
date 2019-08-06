@@ -6,8 +6,6 @@ namespace Legendary
     [CreateAssetMenu(menuName = "Turns/BlockPhase")]
     public class BlockPhase : Phase
     {
-        public PlayerAction changeActivePlayer;
-
         public GameStates.GameState playerControlState;
 
         public override bool IsComplete()
@@ -23,33 +21,19 @@ namespace Legendary
 
         public override void OnStartPhase()
         {
-            if (!isInit)
+            forceExit = true;
+            return;
+
+            GameManager gm = Settings.gameManager;
+
+            gm.SetState(playerControlState);
+            gm.onPhaseCompleted.Raise();
+
+            PlayerHolder e = gm.GetEnemyOf(gm.currentPlayer);
+            if (e.attackingCards.Count == 0)
             {
-                GameManager gm = Settings.gameManager;
-
-                gm.SetState(playerControlState);
-                gm.onPhaseCompleted.Raise();
-                isInit = true;
-
-                if (gm.currentPlayer.attackingCards.Count == 0)
-                {
-                    forceExit = true;
-                    return;
-                }
-
-                if (gm.otherPlayersHolder.playerHolder.isHumanPlayer)
-                {
-                    gm.LoadPlayerOnActive(gm.otherPlayersHolder.playerHolder);
-                }
-            }
-        }
-
-        public override void OnEndPhase()
-        {
-            if (isInit)
-            {
-                Settings.gameManager.SetState(null);
-                isInit = false;
+                forceExit = true;
+                return;
             }
         }
 

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 2605145122120576563, guid: ef7d20db4ef0fb545a401ce4761d97e6,
     type: 3}
-  resourcesGrid: {fileID: 0}
   cardDownLogic: {fileID: 11400000, guid: 177d0a2bb19ece4429424f617e02b427, type: 2}
   handCard: {fileID: 11400000, guid: 6952faa8cf3fcf042bec9c995095290d, type: 2}
+  attackElement: {fileID: 11400000, guid: dbf2a4c80cf9a6f4a93a28a430a1b544, type: 2}
+  defenseElement: {fileID: 11400000, guid: dbf2a4c80cf9a6f4a93a28a430a1b544, type: 2}

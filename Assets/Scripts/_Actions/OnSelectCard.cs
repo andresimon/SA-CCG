@@ -25,12 +25,19 @@ namespace Legendary.GameStates
                     {
                         GameManager gm = Settings.gameManager;
                         PlayerHolder enemy = gm.GetEnemyOf(gm.currentPlayer);
-                        if ( c.owner == enemy )
+
+                        if (c.owner != enemy)
                         {
-                            Debug.Log(c.name);
-                            currentCard.value = c;
-                            gm.SetState(holdingCard);
-                            onCurrentCardSelected.Raise();
+                            if (gm.currentPlayer.downCards.Contains(c))
+                            {
+                                if (!c.isFlatfooted)
+                                {
+                                    Debug.Log(c.name);
+                                    currentCard.value = c;
+                                    gm.SetState(holdingCard);
+                                    onCurrentCardSelected.Raise();
+                                }
+                            }
                         }
 
                         return;

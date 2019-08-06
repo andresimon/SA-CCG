@@ -2312,6 +2312,7 @@ MonoBehaviour:
   - {fileID: 1882966122965308558}
   - {fileID: 952223388}
   graveyardVariable: {fileID: 11400000, guid: 0ad668e9ddd4ec2408eccf02613ae108, type: 2}
+  defenceProperty: {fileID: 11400000, guid: dbf2a4c80cf9a6f4a93a28a430a1b544, type: 2}
 --- !u!4 &1300261428
 Transform:
   m_ObjectHideFlags: 0

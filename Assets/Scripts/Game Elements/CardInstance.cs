@@ -25,8 +25,8 @@ namespace Legendary
 
                 // if a card has flying than can be blocked by non flying , you can check it here, or cases like that
 
-                if ( result )
-                    Settings.gameManager.AddBlockInstance(this, block, ref count);
+                //if ( result )
+                //    Settings.gameManager.AddBlockInstance(this, block, ref count);
             }
             else
             {

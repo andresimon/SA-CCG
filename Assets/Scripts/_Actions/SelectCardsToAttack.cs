@@ -22,11 +22,13 @@ namespace Legendary
 
                     if (!p.downCards.Contains(inst)) return;
 
-                    if ( inst.CanAttack())
-                    {
-                        p.attackingCards.Add(inst);
-                        p.currentHolder.SetCardsOnBatlleLine(inst);
-                    }
+                    MultiplayerManager.singleton.PlayerWantsToUseCard(inst.viz.card.instID, p.photonId, MultiplayerManager.CardOpertation.setCardForBattle);
+
+                    //if ( inst.CanAttack())
+                    //{
+                    //    p.attackingCards.Add(inst);
+                    //    p.currentHolder.SetCardsOnBatlleLine(inst);
+                    //}
 
                 }
 

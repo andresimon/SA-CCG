@@ -49,4 +49,17 @@ MonoBehaviour:
   - RPC_PlayerWantsToUseCard
   - RPC_PlayerCreatesCard
   - RPC_PlayerUsesCard
+  - RPC_PlayerWantsToResetResourcesCards_Master
+  - RPC_ResetFlatfootedCardsForPlayer
+  - RPC_ResetFlatfootedCardsForPlayer_Master
+  - RPC_ResetResourcesCardsForPlayer
+  - RPC_BattleResolve
+  - RPC_BattleResolveCallback
+  - RPC_SyncPlayerHealth
+  - RPC_MessagePhase
+  - RPC_PlayerBlocksTargetCard_Client
+  - RPC_PlayerBlocksTargetCard_Master
+  - RPC_PlayerEndsPhase
+  - RPC_PlayerEndPhase
+  - RPC_SetPhaseToPlayer
   DisableAutoOpenWizard: 1
